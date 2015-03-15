@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGICV2_SRV" xml:lang="pt" sap:schema-version="0000"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Subscription" sap:semantics="subscriptions" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Sub. ID" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="user" Type="Edm.String" MaxLength="12" m:FC_TargetPath="SyndicationAuthorName" m:FC_KeepInContent="false" sap:label="Nome do usuário" sap:creatable="false" sap:filterable="false"/>
+                <Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false" sap:label="Registro hora" sap:creatable="false" sap:filterable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="255" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Title" sap:filterable="false"/>
+                <Property Name="deliveryAddress" Type="Edm.String" sap:label="Delivery Address" sap:filterable="false"/>
+                <Property Name="persistNotifications" Type="Edm.Boolean" sap:label="Persist Notification" sap:filterable="false"/>
+                <Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection" sap:filterable="false"/>
+                <Property Name="filter" Type="Edm.String" sap:label="Filter" sap:filterable="false"/>
+                <Property Name="select" Type="Edm.String" MaxLength="255" sap:label="Select" sap:filterable="false"/>
+                <Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/>
+            </EntityType>
+            <EntityType Name="Notification" sap:semantics="notifications" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Notification ID"/>
+                <Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection"/>
+                <Property Name="title" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Notif. Text"/>
+                <Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false" sap:label="Registro hora"/>
+                <Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/>
+                <Property Name="entriesOfInterest" Type="Edm.Int32" sap:label="No. of Entries"/>
+                <Property Name="recipient" Type="Edm.String" MaxLength="112" sap:label="Recipient" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="Centro" sap:label="Centro" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:label="ID de Centro" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:label="Descritivo" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="País" Type="Edm.String" Nullable="false" sap:label="Código de país" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Proforma" sap:label="Proforma" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProformaID"/>
+                </Key>
+                <Property Name="ProformaID" Type="Edm.String" Nullable="false" sap:label="ID Interno" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IDExterno" Type="Edm.String" Nullable="false" sap:label="ID Externo" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="FornecedorID" Type="Edm.String" Nullable="false" sap:label="ID Fornecedor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Incoterm1" Type="Edm.String" Nullable="false" sap:label="Incoterm1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Incoterm2" Type="Edm.String" Nullable="false" sap:label="Incoterm2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Valor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Moeda" Type="Edm.String" Nullable="false" sap:label="Moeda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FornecedorD" Type="Edm.String" Nullable="false" sap:label="Fornecedor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Frete" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Frete" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Seguro" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Seguro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DataCriacao" Type="Edm.String" Nullable="false" sap:label="Data de criação" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Fornecedor" Relationship="ZGICV2_SRV.ProformaFornecedor" FromRole="FromRole_ProformaFornecedor" ToRole="ToRole_ProformaFornecedor" sap:label="Fornecedor"/>
+                <NavigationProperty Name="ProformaItemSet" Relationship="ZGICV2_SRV.ProformaProformaItem" FromRole="FromRole_ProformaProformaItem" ToRole="ToRole_ProformaProformaItem" sap:label="Items de proforma"/>
+            </EntityType>
+            <EntityType Name="Processo" sap:label="Processo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProcessoID"/>
+                </Key>
+                <Property Name="ProcessoID" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ETA" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BL" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Moeda" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Forneceder" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="FacturasSet" Relationship="ZGICV2_SRV.ProcessoFactura" FromRole="FromRole_ProcessoFactura" ToRole="ToRole_ProcessoFactura" sap:label="Facturas do processo"/>
+                <NavigationProperty Name="ContentoresSet" Relationship="ZGICV2_SRV.ProcessoContentor" FromRole="FromRole_ProcessoContentor" ToRole="ToRole_ProcessoContentor" sap:label="Contentores do processo"/>
+                <NavigationProperty Name="CustosSet" Relationship="ZGICV2_SRV.ProcessoCusto" FromRole="FromRole_ProcessoCusto" ToRole="ToRole_ProcessoCusto" sap:label="Custos do processo"/>
+            </EntityType>
+            <EntityType Name="Contentor" sap:label="Contentor" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Matricula"/>
+                </Key>
+                <Property Name="Matricula" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tipo" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descarga" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gateout" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ContentorItemSet" Relationship="ZGICV2_SRV.ContentorContentorItem" FromRole="FromRole_ContentorContentorItem" ToRole="ToRole_ContentorContentorItem" sap:label="Items de contentores"/>
+            </EntityType>
+            <EntityType Name="ContentorItem" sap:label="Contentor Item" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IDContentor"/>
+                </Key>
+                <Property Name="IDContentor" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Artigo" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Quantidade" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unidade" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lote" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ProformaItem" sap:label="Proforma Item" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProformaID"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ProformaID" Type="Edm.String" Nullable="false" sap:label="ID Proforma" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:label="ID Item" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ArtigoID" Type="Edm.String" Nullable="false" sap:label="Artigo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:label="Descritivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Quantidade" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Quantidade" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unidade" Type="Edm.String" Nullable="false" sap:label="Unidade" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Valor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Moeda" Type="Edm.String" Nullable="false" sap:label="Moeda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PrecoUnit" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Unitário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Fornecedor" sap:label="Fornecedor" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="FornecedorID"/>
+                </Key>
+                <Property Name="FornecedorID" Type="Edm.String" Nullable="false" sap:label="Fornecedor" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:label="Descritivo" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Telefone" Type="Edm.String" Nullable="false" sap:label="Telefone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" sap:label="E-mail" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ProformasSet" Relationship="ZGICV2_SRV.FornecedorProforma" FromRole="FromRole_FornecedorProforma" ToRole="ToRole_FornecedorProforma" sap:label="Proformas de fornecedor"/>
+            </EntityType>
+            <EntityType Name="Artigo" sap:label="Artigo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ArtigoID"/>
+                </Key>
+                <Property Name="ArtigoID" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Descritivo" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="Factura" sap:label="Factura" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="FacturaID"/>
+                </Key>
+                <Property Name="FacturaID" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Moeda" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Incoterm1" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Incoterm2" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Custo" sap:label="Custo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustoID"/>
+                </Key>
+                <Property Name="CustoID" Type="Edm.String" Nullable="false" sap:label="Tipo de custo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Valor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Moeda" Type="Edm.String" Nullable="false" sap:label="Moeda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cambio" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:label="Cambio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FornecedorID" Type="Edm.String" Nullable="false" sap:label="Fornecedor ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="FornecedorProforma" sap:content-version="1">
+                <End Type="ZGICV2_SRV.Fornecedor" Multiplicity="1" Role="FromRole_FornecedorProforma"/>
+                <End Type="ZGICV2_SRV.Proforma" Multiplicity="*" Role="ToRole_FornecedorProforma"/>
+            </Association>
+            <Association Name="ContentorContentorItem" sap:content-version="1" sap:label="Items de contentores">
+                <End Type="ZGICV2_SRV.Contentor" Multiplicity="1" Role="FromRole_ContentorContentorItem"/>
+                <End Type="ZGICV2_SRV.ContentorItem" Multiplicity="*" Role="ToRole_ContentorContentorItem"/>
+            </Association>
+            <Association Name="ProformaProformaItem" sap:content-version="1" sap:label="Items de proformas">
+                <End Type="ZGICV2_SRV.Proforma" Multiplicity="1" Role="FromRole_ProformaProformaItem"/>
+                <End Type="ZGICV2_SRV.ProformaItem" Multiplicity="*" Role="ToRole_ProformaProformaItem"/>
+            </Association>
+            <Association Name="ProformaFornecedor" sap:content-version="1">
+                <End Type="ZGICV2_SRV.Proforma" Multiplicity="1" Role="FromRole_ProformaFornecedor"/>
+                <End Type="ZGICV2_SRV.Fornecedor" Multiplicity="1" Role="ToRole_ProformaFornecedor"/>
+            </Association>
+            <Association Name="ProcessoContentor" sap:content-version="1" sap:label="Contentores do Processo">
+                <End Type="ZGICV2_SRV.Processo" Multiplicity="1" Role="FromRole_ProcessoContentor"/>
+                <End Type="ZGICV2_SRV.Contentor" Multiplicity="*" Role="ToRole_ProcessoContentor"/>
+            </Association>
+            <Association Name="ProcessoFactura" sap:content-version="1" sap:label="Facturas do Processo">
+                <End Type="ZGICV2_SRV.Processo" Multiplicity="1" Role="FromRole_ProcessoFactura"/>
+                <End Type="ZGICV2_SRV.Factura" Multiplicity="*" Role="ToRole_ProcessoFactura"/>
+            </Association>
+            <Association Name="ProcessoCusto" sap:content-version="1" sap:label="Custos de processo">
+                <End Type="ZGICV2_SRV.Processo" Multiplicity="1" Role="FromRole_ProcessoCusto"/>
+                <End Type="ZGICV2_SRV.Custo" Multiplicity="*" Role="ToRole_ProcessoCusto"/>
+            </Association>
+            <EntityContainer Name="ZGICV2_SRV_Entities" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="NotificationCollection" EntityType="ZGICV2_SRV.Notification" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CENTROSet" EntityType="ZGICV2_SRV.Centro" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ProformaSet" EntityType="ZGICV2_SRV.Proforma" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ProcessoSet" EntityType="ZGICV2_SRV.Processo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ContentorSet" EntityType="ZGICV2_SRV.Contentor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ContentorItemSet" EntityType="ZGICV2_SRV.ContentorItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ProformaItemSet" EntityType="ZGICV2_SRV.ProformaItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="FornecedorSet" EntityType="ZGICV2_SRV.Fornecedor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ArtigoSet" EntityType="ZGICV2_SRV.Artigo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="FacturaSet" EntityType="ZGICV2_SRV.Factura" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CustoSet" EntityType="ZGICV2_SRV.Custo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SubscriptionCollection" EntityType="ZGICV2_SRV.Subscription" sap:content-version="1"/>
+                <AssociationSet Name="ProcessoContentor_AssocSet" Association="ZGICV2_SRV.ProcessoContentor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProcessoSet" Role="FromRole_ProcessoContentor"/>
+                    <End EntitySet="ContentorSet" Role="ToRole_ProcessoContentor"/>
+                </AssociationSet>
+                <AssociationSet Name="ProformaProformaItem_AssocSet" Association="ZGICV2_SRV.ProformaProformaItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProformaSet" Role="FromRole_ProformaProformaItem"/>
+                    <End EntitySet="ProformaItemSet" Role="ToRole_ProformaProformaItem"/>
+                </AssociationSet>
+                <AssociationSet Name="ProformaFornecedor_AssocSet" Association="ZGICV2_SRV.ProformaFornecedor" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProformaSet" Role="FromRole_ProformaFornecedor"/>
+                    <End EntitySet="FornecedorSet" Role="ToRole_ProformaFornecedor"/>
+                </AssociationSet>
+                <AssociationSet Name="ProcessoCusto_AssocSet" Association="ZGICV2_SRV.ProcessoCusto" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProcessoSet" Role="FromRole_ProcessoCusto"/>
+                    <End EntitySet="CustoSet" Role="ToRole_ProcessoCusto"/>
+                </AssociationSet>
+                <AssociationSet Name="FornecedorProforma_AssocSet" Association="ZGICV2_SRV.FornecedorProforma" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="FornecedorSet" Role="FromRole_FornecedorProforma"/>
+                    <End EntitySet="ProformaSet" Role="ToRole_FornecedorProforma"/>
+                </AssociationSet>
+                <AssociationSet Name="ProcessoFactura_AssocSet" Association="ZGICV2_SRV.ProcessoFactura" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProcessoSet" Role="FromRole_ProcessoFactura"/>
+                    <End EntitySet="FacturaSet" Role="ToRole_ProcessoFactura"/>
+                </AssociationSet>
+                <AssociationSet Name="ContentorContentorItem_AssocSet" Association="ZGICV2_SRV.ContentorContentorItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContentorSet" Role="FromRole_ContentorContentorItem"/>
+                    <End EntitySet="ContentorItemSet" Role="ToRole_ContentorContentorItem"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://localhost:9090/webidedispatcher/destinations/R3R/sap/opu/odata/sap/ZGICV2_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="http://localhost:9090/webidedispatcher/destinations/R3R/sap/opu/odata/sap/ZGICV2_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

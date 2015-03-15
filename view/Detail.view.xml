@@ -1,0 +1,228 @@
+<mvc:View
+	controllerName="sap.sousa.Processo.view.Detail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:c="sap.ui.core"
+	xmlns="sap.m">
+	<Page
+		showNavButton="{device>/isPhone}"
+		navButtonPress="onNavBack"
+		class="sapUiFioriObjectPage"
+		title="{i18n>detailTitle}">
+		<content>
+			<ObjectHeader
+                    title="{ProcessoID}"
+					intro="{Forneceder}"
+					responsive="true"
+					number="{Valor}"
+					numberUnit="{Moeda}">
+				 
+				<ObjectAttribute title="ETA" text="{ path: 'ETA',
+				                                     formatter: 'sap.sousa.Processo.util.Formatter.dateConvert' }"/>
+				<ObjectAttribute title="B/L" text="{BL}"/>
+				
+			</ObjectHeader>
+			<IconTabBar
+				select="onDetailSelect" 
+				expanded="false"
+				id="idIconTabBar">
+				<items>
+					<IconTabFilter
+						key="CustosSet"
+						text="Custos"
+						
+						icon="sap-icon://customer-financial-fact-sheet">
+						<!--key="Detail" -->
+                        <Table id="TabelaCustos" >
+			                <columns>
+			                	<Column
+				                	minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Left" >
+					                <header><Label text="Descritivo" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Valor" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Moeda" /></header>
+				                </Column>
+			                	<Column
+				                	hAlign="Center" >
+				                	<header><Label text="Cambio" /></header>
+				                </Column>
+				                <Column
+				                	hAlign="Center" >
+					                <header><Label text="Fornecedor" /></header>
+			                	</Column>
+			             </columns>
+		                </Table>
+					</IconTabFilter>
+					<IconTabFilter
+						key="FacturasSet"
+						text="Facturas"
+						iconColor="Positive"
+						icon="sap-icon://sales-document">
+						<!--key="Detail" -->
+                        <Table id="TabelaFacturas" >
+			                <columns>
+			                	<Column
+				                	minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Left" >
+					                <header><Label text="ID Factura" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="FOB" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Frete" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Seguro" /></header>
+				                </Column>
+				               	 <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="CIF" /></header>
+				                </Column>
+			             </columns>
+		                </Table>
+					</IconTabFilter>
+					<IconTabFilter
+						key="ContentoresSet"
+						text="Contentores"
+						iconColor="Critical"
+						icon="sap-icon://shipping-status">
+						<!--key="Detail" -->
+                        <Table id="TabelaContentores">
+			                <columns>
+			                	<Column
+				                	minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Left" >
+					                <header><Label text="Matricula" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Tipo" /></header>
+				                </Column>
+				                <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Localizacao" /></header>
+				                </Column>
+				                 <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Dt.Descarga" /></header>
+				                </Column>
+				                 <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Dt.Gateout" /></header>
+				                </Column>
+				                 <Column
+					                minScreenWidth="Tablet"
+					                demandPopin="true"
+					                hAlign="Center" >
+					                <header><Label text="Sobrestadia" /></header>
+				                </Column>
+			             </columns>
+		                </Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<l:Grid
+			    defaultSpan="L12 M12 S12"
+		    	width="auto">
+			    <l:content>
+				    <f:SimpleForm
+					    id="idProcessoForm"
+					    minWidth="800"
+					    maxContainerCols="4"
+					    editable="true"
+					    layout="ResponsiveGridLayout"
+					    labelSpanL="3"
+					    labelSpanM="3"
+					    emptySpanL="1"
+					    emptySpanM="1"
+					    columnsL="2"
+					    columnsM="2"
+					    class="editableForm">
+					    <f:content>
+					        <!-- Basic info -->
+						    <c:Title text="{i18n>ProcessoBasicos}" />
+						    <Label text="Descritivo" />
+						    <Input id="idDescritivo" value="{Descritivo}" />
+						    <Label text="ATA" />
+						    <DateTimeInput
+						        id="idATA"
+							    type="Date"
+							    value="{ATA}" />
+							<Label text="B/L" />
+							<Input id="idBL" value="{BL}" />
+							<Label text="Navio Partida" />
+						    <Input id="idNavioPartida" value="{NavioPartida}" />
+						    <Label text="Navio Chegada" />
+						    <Input id="idNavioChegada" value="{NavioChegada}" />
+                            <!-- Discontinued? -->
+					        <c:Title text="Documentos" />
+					        <Label text="Dt.Receção" />
+						    <DateTimeInput
+						        id="idRececaoDoc"
+							    type="Date"
+							    value="{RececaoDoc}" />
+						    <Label text="CNCA" />
+						    <Input id="idCNCA" value="{CNCA}" />
+						    <Label text="Req.Fundos" />
+						    <Input id="idReqFundos" value="{ReqFundos}" />
+						    <Label text="DU" />
+						    <Input id="idDU" value="{DU}" />
+						    <c:Title text="Terminais" />
+					    	<Label text="Terminal" />
+						    <Select
+						    	id="idTerminal"
+						    	items="{/TerminalSet}"
+						    	selectedKey="{TerminalID}"
+							    width="100%">
+							    <c:Item key="{TerminalID}" text="{Descritivo}" />
+						    </Select>
+						    <Label text="Sobrestadia" />
+						    <Input id="idSobrestadia" value="{Sobrestadia}" />
+					    </f:content>
+				    </f:SimpleForm>
+			    </l:content>
+		    </l:Grid> 
+		</content>
+		<footer>
+			<Toolbar>
+			        <ToolbarSpacer/>
+                    <Button text="{i18n>ProcessoGravar}" type="Emphasized" press="onSave" />
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

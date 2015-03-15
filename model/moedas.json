@@ -1,0 +1,14 @@
+{
+    "items": [
+        {
+            "key": "AOA", "Descrition" : "Kwanza"
+        },
+        {
+            "key": "USD",   "Description": "Dolar Americado"
+        },
+        {
+            "key": "EUR",   "Description": "Euro"
+        }  
+    ]
+}
+        
