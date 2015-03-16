@@ -102,6 +102,11 @@ sap.ui.core.UIComponent.extend("sap.sousa.Processo.Component", {
 		oDeviceModel.setDefaultBindingMode("OneWay");
 		this.setModel(oDeviceModel, "device");
 
+        var currencyModel = new sap.ui.model.json.JSONModel();
+        currencyModel.loadData("/Processo/resources/moedas.json", '', false);
+        this.setModel(currencyModel,"CurrencyModel");
+
+
 		this.getRouter().initialize();
 
 	},
