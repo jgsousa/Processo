@@ -103,7 +103,7 @@ sap.ui.core.UIComponent.extend("sap.sousa.Processo.Component", {
 		this.setModel(oDeviceModel, "device");
 
         var currencyModel = new sap.ui.model.json.JSONModel();
-        currencyModel.loadData("/Processo/resources/moedas.json", '', false);
+        currencyModel.loadData("/model/moedas.json", '', false);
         this.setModel(currencyModel,"CurrencyModel");
 
 

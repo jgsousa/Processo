@@ -131,13 +131,13 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 	        if (oTable &&  ( !items || currentEntity !== newEntity ) ){
 
 	  	        var oTemplate = new sap.ui.core.Item({
-                     text: "{key}",
-                      key: "{key}"
+                     text: "{CurrencyModel>key}",
+                      key: "{CurrencyModel>key}"
                 });
                 var select = new sap.m.Select({
                      selectedKey: "{Moeda}", 
                      items: {path: "CurrencyModel>/items", template: oTemplate} });
-                
+
                 oTable.bindAggregation("items", {
                 path: path,
                 template: new sap.m.ColumnListItem({
