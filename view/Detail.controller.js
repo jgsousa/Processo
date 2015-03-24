@@ -1,5 +1,7 @@
 jQuery.sap.require("sap.sousa.Processo.util.Formatter");
 jQuery.sap.require("sap.sousa.Processo.util.Controller");
+jQuery.sap.require("sap.sousa.Processo.util.Tables");
+jQuery.sap.require("sap.sousa.Processo.util.Modelo");
 
 sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 
@@ -40,8 +42,9 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 			var sEntityPath = "/" + oParameters.arguments.entity;
 			this.bindView(sEntityPath);
 			
-			if(this.entity && this.entity !== oParameters.arguments.entity){
+			if(!this.entity || this.entity !== oParameters.arguments.entity){
 			    this.clearTableBinding();
+                sap.sousa.Processo.util.Modelo.loadForEntity(oParameters.arguments.entity, this);
 			}
 
 			var oIconTabBar = oView.byId("idIconTabBar");
@@ -53,7 +56,7 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 			    var expanded = oIconTabBar.getProperty("expanded");
 			}
 			
-			if(selected && expanded){
+			if(selected){
 			    var path = oIconTabBar.getBindingContext().getPath() + "/" + selected;
 			    this.setTableData(selected, path);
 			}
@@ -119,100 +122,18 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 
     setTableData : function(key, path) {
 
-	    
-	    if (key === "CustosSet"){
-	        var oTable = this.getView().byId("TabelaCustos");
-            var info = oTable.getBindingContext();
-            if(info){
-                var currentEntity = info.getPath();
-                var newEntity = "/" + this.entity;
-            }
-            var items = oTable.getBinding("items");
-	        if (oTable &&  ( !items || currentEntity !== newEntity ) ){
-
-	  	        var oTemplate = new sap.ui.core.Item({
-                     text: "{CurrencyModel>key}",
-                      key: "{CurrencyModel>key}"
-                });
-                var select = new sap.m.Select({
-                     selectedKey: "{Moeda}", 
-                     items: {path: "CurrencyModel>/items", template: oTemplate} });
-
-                oTable.bindAggregation("items", {
-                path: path,
-                template: new sap.m.ColumnListItem({
-                cells: [
-                        new sap.m.Label({ text: "{Descritivo}" }),
-                        new sap.m.Input({
-                            value: {
-                                path: "Valor",
-                                type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
-                            }
-                        }),
-                        select,
-                        new sap.m.Input({ value: "{Cambio}" }),
-                        new sap.m.Label({ text: "{FornecedorID}" })
-                ] }) });
-	        }  
+        if (key === "CustosSet"){
+            var oTable = this.getView().byId("TabelaCustos");
+            sap.sousa.Processo.util.Tables.setCustoTable(this.entity, oTable, this);
         }
         if (key === "FacturasSet"){
-	        var oTable2 = this.getView().byId("TabelaFacturas");
-	        var info2 = oTable2.getBindingContext();
-	        if(info2){
-                var currentEntity2 = info2.getPath();
-                var newEntity2 = "/" + this.entity;
-            }
-            var items2 = oTable2.getBinding("items");
-	        if (oTable2 && ( !items2 || currentEntity2 !== newEntity2 )){
-                oTable2.bindAggregation("items", {
-                path: path,
-                template: new sap.m.ColumnListItem({
-                cells: [
-                        new sap.m.Label({ text: "{FacturaID}" }),
-                        new sap.m.Label({
-                            text: {
-                                path: "FOB",
-                                type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
-                            }}),
-                        new sap.m.Label({
-                            text: {
-                                path: "Frete",
-                                type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
-                            }}),
-                        new sap.m.Label({
-                            text: {
-                                path: "Seguro",
-                                type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
-                            }}),
-                        new sap.m.Label({
-                            text: {
-                                path: "CIF",
-                                type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
-                            }})
-                ] }) });
-	        }  
-        }        
+            var oTable2 = this.getView().byId("TabelaFacturas");
+            sap.sousa.Processo.util.Tables.setFacturasTable(this.entity, oTable2);
+
+        }
         if (key === "ContentoresSet"){
-	        var oTable3 = this.getView().byId("TabelaContentores");
-            var info3 = oTable3.getBindingContext();
-	        if(info3){
-                var currentEntity3 = info3.getPath();
-                var newEntity3 = "/" + this.entity;
-            }
-            var items3 = oTable3.getBinding("items");
-	        if (oTable3 && ( !items3 || currentEntity3 !== newEntity3 )){
-                oTable3.bindAggregation("items", {
-                path: path,
-                template: new sap.m.ColumnListItem({
-                cells: [
-                        new sap.m.Label({ text: "{Matricula}" }),
-                        new sap.m.Label({ text: "{Tipo}" }),
-                        new sap.m.Label({ text: "{Localizacao}" }),
-                        new sap.m.Label({ text: "{DataDescarga}" }),
-                        new sap.m.Label({ text: "{DataGateout}" }),
-                        new sap.m.Label({ text: "{Sobrestadia}" })
-                ] }) });
-	        }  
+            var oTable3 = this.getView().byId("TabelaContentores");
+            sap.sousa.Processo.util.Tables.setContentoresTable(this.entity, oTable3);
         }
     },
     
@@ -233,12 +154,13 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
 	    var path = oEvent.getSource().getBindingContext().getPath() + "/" + key;
 
 	    this.setTableData(key,path);
-	    
-		sap.ui.core.UIComponent.getRouterFor(this).navTo("detail",{
-			entity : oEvent.getSource().getBindingContext().getPath().slice(1),
-			tab: oEvent.getParameter("selectedKey")
-		}, true);	    
-	    
+
+
+        sap.ui.core.UIComponent.getRouterFor(this).navTo("detail", {
+                entity: oEvent.getSource().getBindingContext().getPath().slice(1),
+                tab: oEvent.getParameter("selectedKey")
+        }, true);
+
 
 	},
 	
@@ -251,12 +173,46 @@ sap.sousa.Processo.util.Controller.extend("sap.sousa.Processo.view.Detail", {
         var Context = "/" + this.entity;  
         var object = this._buildObject();
         oModel.update(Context, object, null, function(){  
-                    sap.m.MessageToast.show("Updated Successfully");  
+                    sap.m.MessageToast.show("Gravado com sucesso");
                 }, function(){  
-                    sap.m.MessageToast.show("Update Failed");  
+                    sap.m.MessageToast.show("Falhou gravação");
                 });  
 	},
-	
+
+    handleFornecedorHelp : function (oEvent) {
+        this.inputField = oEvent.getSource();
+        // create value help dialog
+        if (!this._valueHelpDialog) {
+            this._valueHelpDialog = sap.ui.xmlfragment(
+                "sap.sousa.Processo.view.Dialog",
+                this
+            );
+            this.getView().addDependent(this._valueHelpDialog);
+        }
+
+        // open value help dialog
+        this._valueHelpDialog.open();
+    },
+
+    _handleValueHelpSearch : function (evt) {
+        var sValue = evt.getParameter("value");
+        var oFilter = new sap.ui.model.Filter(
+            "Descritivo",
+            sap.ui.model.FilterOperator.Contains, sValue
+        );
+        evt.getSource().getBinding("items").filter([oFilter]);
+    },
+
+    _handleValueHelpClose : function (evt) {
+        var oSelectedItem = evt.getParameter("selectedItem");
+        if (oSelectedItem) {
+            var codigo  = oSelectedItem.getDescription();
+            var oModel = this.getView().getModel();
+            this.inputField.setProperty("value", codigo);
+        }
+        evt.getSource().getBinding("items").filter([]);
+    },
+
 	_buildObject : function(){
 	    var object = this.getView().getModel().getObject("/" + this.entity);
 	    object.Descritivo = this.getView().byId("idDescritivo").getValue();

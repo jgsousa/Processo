@@ -1,5 +1,6 @@
 jQuery.sap.declare("sap.sousa.Processo.Component");
 jQuery.sap.require("sap.sousa.Processo.MyRouter");
+jQuery.sap.require("sap.sousa.Processo.util.Modelo");
 
 sap.ui.core.UIComponent.extend("sap.sousa.Processo.Component", {
 	metadata : {
@@ -106,6 +107,7 @@ sap.ui.core.UIComponent.extend("sap.sousa.Processo.Component", {
         currencyModel.loadData("/model/moedas.json", '', false);
         this.setModel(currencyModel,"CurrencyModel");
 
+        sap.sousa.Processo.util.Modelo.loadFornecedores(this);
 
 		this.getRouter().initialize();
 

@@ -26,9 +26,75 @@
 			</ObjectHeader>
 			<IconTabBar
 				select="onDetailSelect" 
-				expanded="false"
+				expanded="true"
 				id="idIconTabBar">
 				<items>
+                    <IconTabFilter
+                            key="Basicos"
+                            text="Básicos"
+                            icon="sap-icon://account">
+                        <l:Grid
+                                defaultSpan="L12 M12 S12"
+                                width="auto">
+                            <l:content>
+                                <f:SimpleForm
+                                        id="idProcessoForm"
+                                        minWidth="800"
+                                        maxContainerCols="4"
+                                        editable="true"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanL="3"
+                                        labelSpanM="3"
+                                        emptySpanL="1"
+                                        emptySpanM="1"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        class="editableForm">
+                                    <f:content>
+                                        <!-- Basic info -->
+                                        <c:Title text="{i18n>ProcessoBasicos}" />
+                                        <Label text="Descritivo" />
+                                        <Input id="idDescritivo" value="{Descritivo}" />
+                                        <Label text="ATA" />
+                                        <DateTimeInput
+                                                id="idATA"
+                                                type="Date"
+                                                value="{ATA}" />
+                                        <Label text="B/L" />
+                                        <Input id="idBL" value="{BL}" />
+                                        <Label text="Navio Partida" />
+                                        <Input id="idNavioPartida" value="{NavioPartida}" />
+                                        <Label text="Navio Chegada" />
+                                        <Input id="idNavioChegada" value="{NavioChegada}" />
+                                        <!-- Discontinued? -->
+                                        <c:Title text="Documentos" />
+                                        <Label text="Dt.Receção" />
+                                        <DateTimeInput
+                                                id="idRececaoDoc"
+                                                type="Date"
+                                                value="{RececaoDoc}" />
+                                        <Label text="CNCA" />
+                                        <Input id="idCNCA" value="{CNCA}" />
+                                        <Label text="Req.Fundos" />
+                                        <Input id="idReqFundos" value="{ReqFundos}" />
+                                        <Label text="DU" />
+                                        <Input id="idDU" value="{DU}" />
+                                        <c:Title text="Terminais" />
+                                        <Label text="Terminal" />
+                                        <Select
+                                                id="idTerminal"
+                                                items="{/TerminalSet}"
+                                                selectedKey="{TerminalID}"
+                                                width="100%">
+                                            <c:Item key="{TerminalID}" text="{Descritivo}" />
+                                        </Select>
+                                        <Label text="Sobrestadia" />
+                                        <Input id="idSobrestadia" value="{Sobrestadia}" />
+                                    </f:content>
+                                </f:SimpleForm>
+                            </l:content>
+                        </l:Grid>
+                    </IconTabFilter>
 					<IconTabFilter
 						key="CustosSet"
 						text="Custos"
@@ -156,67 +222,6 @@
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
-			<l:Grid
-			    defaultSpan="L12 M12 S12"
-		    	width="auto">
-			    <l:content>
-				    <f:SimpleForm
-					    id="idProcessoForm"
-					    minWidth="800"
-					    maxContainerCols="4"
-					    editable="true"
-					    layout="ResponsiveGridLayout"
-					    labelSpanL="3"
-					    labelSpanM="3"
-					    emptySpanL="1"
-					    emptySpanM="1"
-					    columnsL="2"
-					    columnsM="2"
-					    class="editableForm">
-					    <f:content>
-					        <!-- Basic info -->
-						    <c:Title text="{i18n>ProcessoBasicos}" />
-						    <Label text="Descritivo" />
-						    <Input id="idDescritivo" value="{Descritivo}" />
-						    <Label text="ATA" />
-						    <DateTimeInput
-						        id="idATA"
-							    type="Date"
-							    value="{ATA}" />
-							<Label text="B/L" />
-							<Input id="idBL" value="{BL}" />
-							<Label text="Navio Partida" />
-						    <Input id="idNavioPartida" value="{NavioPartida}" />
-						    <Label text="Navio Chegada" />
-						    <Input id="idNavioChegada" value="{NavioChegada}" />
-                            <!-- Discontinued? -->
-					        <c:Title text="Documentos" />
-					        <Label text="Dt.Receção" />
-						    <DateTimeInput
-						        id="idRececaoDoc"
-							    type="Date"
-							    value="{RececaoDoc}" />
-						    <Label text="CNCA" />
-						    <Input id="idCNCA" value="{CNCA}" />
-						    <Label text="Req.Fundos" />
-						    <Input id="idReqFundos" value="{ReqFundos}" />
-						    <Label text="DU" />
-						    <Input id="idDU" value="{DU}" />
-						    <c:Title text="Terminais" />
-					    	<Label text="Terminal" />
-						    <Select
-						    	id="idTerminal"
-						    	items="{/TerminalSet}"
-						    	selectedKey="{TerminalID}"
-							    width="100%">
-							    <c:Item key="{TerminalID}" text="{Descritivo}" />
-						    </Select>
-						    <Label text="Sobrestadia" />
-						    <Input id="idSobrestadia" value="{Sobrestadia}" />
-					    </f:content>
-				    </f:SimpleForm>
-			    </l:content>
-		    </l:Grid> 
 		</content>
 		<footer>
 			<Toolbar>
