@@ -103,6 +103,13 @@
 						<!--key="Detail" -->
                         <Table id="TabelaCustos" >
 			                <columns>
+                                <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        mergeDuplicates="true"
+                                        hAlign="Left" >
+                                    <header><Label text="Grupo" /></header>
+                                </Column>
 			                	<Column
 				                	minScreenWidth="Tablet"
 					                demandPopin="true"

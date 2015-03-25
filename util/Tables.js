@@ -21,8 +21,10 @@ sap.sousa.Processo.util.Tables = {
 
             oTable.bindAggregation("items", {
                 path: "Custos>/results",
+                vAlign: "Middle",
                 template: new sap.m.ColumnListItem({
                     cells: [
+                        new sap.m.Label({ text: "{Custos>Grupo}"}),
                         new sap.m.Label({ text: "{Custos>Descritivo}" }),
                         new sap.m.Input({
                             value: {
